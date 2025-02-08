@@ -3,10 +3,10 @@ import { ResponseTypes } from '../../utils/response.utils'
 import PersistenceManager from './../../config/db'
 import { EventModel } from './event.model'
 import { IEvents } from './event.interface'
-import RedisManager from '@app/config/redis'
+import RedisManager from './../../config/redis'
 import { getEventSessionKey } from './event.interface'
 import { WaitingList } from '../wait-list/wait-list.model'
-import Logger from '@app/utils/logger.utils'
+import Logger from './../../utils/logger.utils'
 
 export default class EventService {
     static get eventRepository() {

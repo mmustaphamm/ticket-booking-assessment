@@ -1,5 +1,5 @@
 import jwt, { sign } from 'jsonwebtoken'
-import envs from '@config/env'
+import envs from './../config/env'
 
 const { JWT_SECRET_KEY, JWT_ISSUER, JWT_EXPIRATION_IN_SECONDS = 86400 } = envs
 

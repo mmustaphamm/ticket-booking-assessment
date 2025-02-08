@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { CustomError } from './../../common/errors/custom.error'
 import { HttpStatusCode } from 'axios'
 import CustomResponse from './../../utils/response.utils'
-import { encryptResponse } from '@app/common/functionsUtils/functions'
+import { encryptResponse } from './../../common/functionsUtils/functions'
 import BookingService from './booking.service'
 import Logger from './../../utils/logger.utils'
 
