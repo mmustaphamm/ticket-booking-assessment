@@ -59,4 +59,18 @@ npm run dev. The server should be running at: http://localhost:3001 🚀
 ## 🔥 API Endpoints and Documentation
 For documentations and testing out the endpoints https://documenter.getpostman.com/view/29017531/2sAYX8KMYY
 
+## 🔑 File Encryption and Decryption
+This application ensures secure communication by encrypting and decrypting sensitive data using AES-256-CBC.
+```
+To encrypt a payload (e.g., email and password), use CryptoUtils.symmetricEncrypt:
+const data = { email: 'assessment@gmail.com', password: '67685489' }
+const encryptedData = CryptoUtils.symmetricEncrypt(process.env.ENCRYPTION_KEY!, data)
+console.log('Encrypted:', encryptedData)
+
+the value which is then passed to to the request body as { data: encryptedData }
+
+To decrypt the encrypted response:
+const decryptedData = CryptoUtils.symmetricDecrypt(process.env.ENCRYPTION_KEY!, encryptedData)
+console.log('Decrypted:', JSON.parse(decryptedData))
+
 
