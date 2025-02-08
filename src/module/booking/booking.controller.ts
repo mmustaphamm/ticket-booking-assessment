@@ -63,27 +63,4 @@ export default class BookingController {
             throw CustomError.internalServerError(e)
         }
     }
-
-    private static async handler<T, R>(
-        data: T,
-        handler: (data: T) => Promise<R>,
-        response: Response,
-    ) {
-        try {
-            const result = await handler(data)
-            response.status(HttpStatusCode.Ok).send(
-                CustomResponse.build({
-                    code: HttpStatusCode.Ok,
-                    success: true,
-                    data: result,
-                    message: '',
-                }),
-            )
-        } catch (e: any) {
-            if (e instanceof CustomError) {
-                throw e
-            }
-            throw CustomError.internalServerError(e)
-        }
-    }
 }

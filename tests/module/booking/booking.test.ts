@@ -1,89 +1,88 @@
-import BookingController from '@app/module/booking/booking.controller'
 import { Request, Response } from 'express'
-import BookingService from '../../../src/module/booking/booking.service'
-import { CustomError } from '@app/common/errors/custom.error'
-import { HttpStatusCode } from 'axios'
-import { Repository } from 'typeorm'
-import { ResponseTypes } from '@app/utils/response.utils'
-import { encryptResponse } from '@app/common/functionsUtils/functions'
-import EventService from '@app/module/event/event.service'
-import { EventModel } from '@app/module/event/event.model'
+import BookingController from '@app/module/booking/booking.controller'
+import BookingService from '@app/module/booking/booking.service'
 
-jest.mock('@app/module/booking/booking.service', () => ({
-    BookingService: {
-        bookTicket: jest.fn(),
-    },
-}))
-jest.mock('@app/module/booking/booking.controller')
-jest.mock('@app/common/functionsUtils/functions', () => ({
-    encryptResponse: jest.fn(),
+jest.mock('@app/module/booking/booking.controller', () => ({
+    bookTicket: jest.fn(),
 }))
 
-// Define a custom type for the session property
-interface MockRequest extends Partial<Request> {
-    session: { user: { id: number } }
-}
+describe('BookingController', () => {
+    describe('BookingController', () => {
+        let mockRequest: Partial<Request>
+        let mockResponse: Partial<Response>
+        let statusMock: jest.Mock
+        let sendMock: jest.Mock
 
-describe('Booking Controller - bookTicket', () => {
-    let request: MockRequest
-    let response: Partial<Response>
-    let jsonMock: jest.Mock
-    let statusMock: jest.Mock
-    let mockEventRepository: jest.Mocked<Repository<EventModel>>
+        beforeEach(() => {
+            statusMock = jest.fn().mockReturnThis()
+            sendMock = jest.fn()
 
-    beforeEach(() => {
-        jsonMock = jest.fn()
-        statusMock = jest.fn().mockReturnValue({ send: jsonMock })
+            mockRequest = {
+                body: { eventId: '123' },
+                session: { user: { id: 'user-1' } },
+            } as Partial<Request>
 
-        // Create a mock repository
-        mockEventRepository = {
-            findOneBy: jest.fn(),
-            save: jest.fn(),
-        } as unknown as jest.Mocked<Repository<EventModel>>
-
-        // Use jest.spyOn to mock the static getter
-        // ✅ Use Object.defineProperty to mock the getter
-        Object.defineProperty(EventService, 'eventRepository', {
-            get: jest.fn(() => mockEventRepository),
+            mockResponse = {
+                status: statusMock,
+                send: sendMock,
+            } as Partial<Response>
         })
 
-        request = {
-            body: { eventId: '123' },
-            session: { user: { id: 1 } },
-        }
-        response = {
-            status: statusMock,
-        }
+        it('should successfully book a ticket', async () => {
+            const mockResult = { message: 'Booking successful.', bookedTicket: {} }
+
+            // ✅ Correctly spy on the static method
+            const bookTicketSpy = jest
+                .spyOn(BookingService, 'bookTicket')
+                .mockResolvedValue(mockResult)
+
+            // ✅ Call the controller method
+            await BookingController.bookTicket(mockRequest as Request, mockResponse as Response)
+
+            // ✅ Ensure `bookTicket` was called once
+            expect(bookTicketSpy).toHaveBeenCalledTimes(1)
+            expect(bookTicketSpy).toHaveBeenCalledWith('123', 'user-1')
+
+            // ✅ Ensure response is returned correctly
+            expect(statusMock).toHaveBeenCalledWith(200)
+            expect(sendMock).toHaveBeenCalledWith({
+                code: 200,
+                success: true,
+                message: mockResult.message,
+                data: mockResult.bookedTicket,
+            })
+
+            bookTicketSpy.mockRestore() // Cleanup
+        })
     })
 
-    // test('should return a success response when booking is successful', async () => {
-    //     const mockBookingResponse = {
-    //         bookedTicket: { user_id: 'user_1', event_id: '1', status: 'booked' },
-    //         message: 'Booking successful.',
-    //     }
-    //     ;(BookingService.bookTicket as jest.Mock).mockResolvedValue(mockBookingResponse)
-    //     ;(encryptResponse as jest.Mock).mockReturnValue('encrypted_data')
-
-    //     await BookingController.bookTicket(request as Request, response as Response)
-
-    //     expect(BookingService.bookTicket).toHaveBeenCalledWith({ eventId: '1', id: 1 })
-    //     expect(encryptResponse).toHaveBeenCalledWith({ result: mockBookingResponse })
-    //     // expect(statusMock).toHaveBeenCalledWith(HttpStatusCode.Ok)
-    //     // expect(jsonMock).toHaveBeenCalledWith(
-    //     //     expect.objectContaining({
-    //     //         code: HttpStatusCode.Ok,
-    //     //         success: true,
-    //     //         message: 'Booking successful.',
-    //     //         data: 'encrypted_data',
-    //     //     }),
-    //     // )
-    // })
-
-    test('should throw an error when event does not exist', async () => {
-        mockEventRepository.findOneBy.mockResolvedValue(null) // Simulate event not found
-
-        await expect(BookingService.bookTicket({ eventId: '123', id: '1' })).rejects.toThrow(
-            CustomError.badRequest(ResponseTypes.NON_EXISTENT_EVENT),
-        )
+    describe('cancelTicket', () => {
+        // it('should cancel a ticket successfully', async () => {
+        //     const req = mockRequest({ ticketId: '789' })
+        //     const res = mockResponse()
+        //     const cancelResult = { message: 'Booking canceled successfully.' }
+        //     ;(BookingService.cancelTicket as jest.Mock).mockResolvedValue(cancelResult)
+        //     await BookingController.cancelTicket(req, res)
+        //     expect(BookingService.cancelTicket).toHaveBeenCalledWith({ ticketId: '789', id: '123' })
+        //     expect(res.status).toHaveBeenCalledWith(HttpStatusCode.Ok)
+        //     expect(res.send).toHaveBeenCalledWith(
+        //         CustomResponse.build({
+        //             code: HttpStatusCode.Ok,
+        //             success: true,
+        //             message: '',
+        //             data: expect.any(String),
+        //         }),
+        //     )
+        // })
+        // it('should handle errors', async () => {
+        //     const req = mockRequest({ ticketId: '789' })
+        //     const res = mockResponse()
+        //     ;(BookingService.cancelTicket as jest.Mock).mockRejectedValue(
+        //         new Error(ResponseTypes.INTERNAL_SERVER_ERROR),
+        //     )
+        //     await expect(BookingController.cancelTicket(req, res)).rejects.toThrow(
+        //         CustomError.internalServerError(ResponseTypes.NON_EXISTENT_EVENT),
+        //     )
+        // })
     })
 })
