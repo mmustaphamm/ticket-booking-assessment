@@ -20,7 +20,12 @@ This is a ticket booking application built using **Node.js**, **TypeScript**, **
 ## 📦 Installation
 To set up the project locally, follow these steps:
 
-### 1️⃣ **Clone the Repository**
+### 1️⃣ **Clone the Repository or Fork the repository**
 ```sh
-git clone <your-repository-url>
+git clone https://github.com/mmustaphamm/ticket-booking-assessment.git 
 cd ticket-booking-app
+
+```
+### 2️⃣ **Install dependencies**
+```sh
+npm install
