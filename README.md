@@ -40,7 +40,6 @@ To set up the project locally, follow these steps:
 ### 1️⃣ **Clone the Repository or Fork the repository**
 ```sh
 git clone https://github.com/mmustaphamm/ticket-booking-assessment.git 
-cd ticket-booking-app
 
 ```
 ### 2️⃣ **Install dependencies**
@@ -55,12 +54,8 @@ There's a .env.example file in the root folder of the application, copy the env 
 ### 5️⃣ **Run the Application**
 npm run dev. The server should be running at: http://localhost:3001 🚀
 
-## 🔥 API Endpoints
-Method	Endpoint	Description
-POST	/api/auth/register	Register a user
-POST	/api/auth/login	Login a user
-GET	/api/tickets	Get available tickets
-POST	/api/tickets/book	Book a ticket
-DELETE	/api/tickets/:id/cancel	Cancel a ticket
+## 🔥 API Endpoints and Documentation
+``` sh
+For documentations and testing out the endpoints https://documenter.getpostman.com/view/29017531/2sAYX8KMYY
 
 
