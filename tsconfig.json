@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+      "lib": [
+        "es6"
+      ],
+      "target": "es2016",
+      "module": "commonjs",
+      "rootDir": "src",
+      "outDir": "build",
+      "esModuleInterop": true,
+      "strict": true,
+      "skipLibCheck": true,
+      "noImplicitAny": false,
+      "strictNullChecks": true,
+      "resolveJsonModule": true,
+      "moduleResolution": "node",
+      "forceConsistentCasingInFileNames": true,
+      "emitDecoratorMetadata": true, // for TypeORM
+      "experimentalDecorators": true, // for TypeORM
+      "strictPropertyInitialization": false,
+      "baseUrl": ".",
+      "paths": {
+        "@app/*": [
+          "./src/*"
+        ],
+        "@config/*": [
+          "./src/config/*"
+        ]
+      },
+    },
+    "include": [
+      "src/**/*.ts",
+      "./src/config/**/*.ts",
+      "tests/**/*.ts",
+      "node_modules/@types/node/globals.d.ts"
+    ],
+    "exclude": [
+      "node_modules",
+      ".vscode"
+    ],
+  }
