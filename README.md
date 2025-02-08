@@ -29,3 +29,8 @@ cd ticket-booking-app
 ### 2️⃣ **Install dependencies**
 ```sh
 npm install
+
+```
+### 3️⃣ **Set Up Environment Variables**
+Create a .env file in the root directory and add your configurations:
+There's a .env.example file in the root folder of the application, copy the env variables from the file and paste them in the .env file
