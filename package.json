@@ -6,7 +6,7 @@
         "copy-html": "copyfiles -u 1 src/**/*.* build",
         "build": "rimraf ./build && tsc && npm run copy-html",
         "start": "npm run build && node build/src/server.js",
-        "dev": "nodemon src/index.ts",
+        "dev": "nodemon src/server.ts",
         "test": "jest",
         "typeorm": "npx typeorm",
         "migration:generate": "npx ts-node -P ./tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d ./src/config/typeorm.config.ts ./src/database/migrations/migration",
