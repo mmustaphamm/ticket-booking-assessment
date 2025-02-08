@@ -12,6 +12,7 @@ This is a ticket booking application built using **Node.js**, **TypeScript**, **
 - - **End-to-End Encryption** for request and response security
 - **JWT Authentication** for secure user access
 - **Data encryption & decryption** to prevent data breaches in transit
+- - **Docker Support** for containerized deployment
 
 ## 🔐 Security Implementations
 1. **JWT Authentication**  
@@ -33,6 +34,7 @@ This is a ticket booking application built using **Node.js**, **TypeScript**, **
 - **Validation**: Joi
 - **Encryption**: AES-256
 - **Environment Management**: dotenv
+- - **Containerization**: Docker
 
 ## 📦 Installation
 To set up the project locally, follow these steps:
