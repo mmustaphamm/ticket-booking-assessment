@@ -9,12 +9,29 @@ This is a ticket booking application built using **Node.js**, **TypeScript**, **
 - Real-time availability checking
 - Redis caching for performance optimization
 - In-memory MySQL database for fast operations
+- - **End-to-End Encryption** for request and response security
+- **JWT Authentication** for secure user access
+- **Data encryption & decryption** to prevent data breaches in transit
+
+## 🔐 Security Implementations
+1. **JWT Authentication**  
+   - The application uses **JSON Web Tokens (JWT)** for secure user authentication.  
+   - Each request requires a valid JWT token to access protected routes.
+
+2. **End-to-End Encryption**  
+   - All incoming requests are encrypted before reaching the server.  
+   - The server **decrypts the request**, processes it, and then **encrypts the response** before sending it back.  
+   - This prevents **man-in-the-middle (MITM) attacks** and ensures **data integrity**.
+
+3. **Secure Environment Variables**  
+   - Sensitive credentials (e.g., database connection, API keys) are stored in a `.env` file and never hardcoded.
 
 ## 🛠️ Technologies Used
 - **Backend**: Node.js, TypeScript
 - **Database**: MySQL (In-Memory)
 - **Cache**: Redis
 - **Validation**: Joi
+- **Encryption**: AES-256
 - **Environment Management**: dotenv
 
 ## 📦 Installation
@@ -34,3 +51,16 @@ npm install
 ### 3️⃣ **Set Up Environment Variables**
 Create a .env file in the root directory and add your configurations:
 There's a .env.example file in the root folder of the application, copy the env variables from the file and paste them in the .env file
+
+### 5️⃣ **Run the Application**
+npm run dev. The server should be running at: http://localhost:3001 🚀
+
+## 🔥 API Endpoints
+Method	Endpoint	Description
+POST	/api/auth/register	Register a user
+POST	/api/auth/login	Login a user
+GET	/api/tickets	Get available tickets
+POST	/api/tickets/book	Book a ticket
+DELETE	/api/tickets/:id/cancel	Cancel a ticket
+
+
