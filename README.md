@@ -16,3 +16,11 @@ This is a ticket booking application built using **Node.js**, **TypeScript**, **
 - **Cache**: Redis
 - **Validation**: Joi
 - **Environment Management**: dotenv
+
+## 📦 Installation
+To set up the project locally, follow these steps:
+
+### 1️⃣ **Clone the Repository**
+```sh
+git clone <your-repository-url>
+cd ticket-booking-app
