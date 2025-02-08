@@ -69,4 +69,8 @@ console.log('Encrypted:', encryptedData)
 
 the value which is then passed to to the request body as { data: encryptedData }
 
+To decrypt the encrypted response:
+const decryptedData = CryptoUtils.symmetricDecrypt(process.env.ENCRYPTION_KEY!, encryptedData)
+console.log('Decrypted:', JSON.parse(decryptedData))
+
 
