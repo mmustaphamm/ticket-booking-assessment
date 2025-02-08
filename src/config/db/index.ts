@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { DataSource, Repository } from 'typeorm'
 import envs from './../../config/env'
 import { DataSourceOptions } from 'typeorm/data-source/DataSourceOptions'
@@ -26,7 +27,7 @@ export interface PersistenceConfig {
 class PersistenceManager {
     private static _dataSource: DataSource
 
-    static initialize({ entities = [User, EventModel, WaitingList, Booking] }: PersistenceConfig) {
+    static initialize({ entities = [] }: PersistenceConfig) {
         const options: DataSourceOptions = {
             type: 'mysql',
             port: Number(DB_PORT) as number,

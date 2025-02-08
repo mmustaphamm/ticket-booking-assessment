@@ -9,7 +9,6 @@ const envs: any = process.env
 const NODE_ENV = `${envs.NODE_ENV}`
 
 const requiredVariables = [
-    // 'TZ',
     'PORT',
     'DB_HOST',
     'DB_USER',
@@ -17,9 +16,6 @@ const requiredVariables = [
     'DB_NAME',
     'DB_POOL_CONNECTION_LIMIT',
     'DB_PORT',
-    'REDIS_HOST',
-    'REDIS_PORT',
-    'REDIS_PASSWORD',
 ]
 
 const missingVariables: any = []

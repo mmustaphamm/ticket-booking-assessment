@@ -109,7 +109,7 @@ export default class CryptoUtils {
     static symmetricEncrypt(key: string, data: any) {
         const iv = crypto.randomBytes(16)
         const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key, 'base64'), iv)
-        let encrypted = cipher.update(data, 'utf8', 'base64')
+        let encrypted = cipher.update(JSON.stringify(data), 'utf8', 'base64')
         encrypted += cipher.final('base64')
         return `${iv.toString('base64')}:${encrypted}`
     }
