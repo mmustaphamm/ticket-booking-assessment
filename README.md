@@ -13,6 +13,7 @@ This is a ticket booking application built using **Node.js**, **TypeScript**, **
 - **JWT Authentication** for secure user access
 - **Data encryption & decryption** to prevent data breaches in transit
 - - **Docker Support** for containerized deployment
+- - **Code Formatting with Prettier** for consistent styling
 
 ## 🔐 Security Implementations
 1. **JWT Authentication**  
