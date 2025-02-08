@@ -55,7 +55,6 @@ There's a .env.example file in the root folder of the application, copy the env 
 npm run dev. The server should be running at: http://localhost:3001 🚀
 
 ## 🔥 API Endpoints and Documentation
-``` sh
 For documentations and testing out the endpoints https://documenter.getpostman.com/view/29017531/2sAYX8KMYY
 
 
